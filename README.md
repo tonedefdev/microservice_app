@@ -1,4 +1,4 @@
-# Example Microservices App
+# Example Microservices App Running on Kubernetes\Kind
 
 This is an example application that includes:
 - .NET Core 3.1 API Application for Project Task management
