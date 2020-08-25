@@ -1,4 +1,4 @@
-# Example Microservices App Running on Kubernetes\Kind
+# Example Microservices App Running on Kind
 
 This is an example application that includes:
 - A .NET Core 3.1 API application for a project tasks management service
@@ -6,11 +6,11 @@ This is an example application that includes:
 - Kind Kubernetes cluster configurations with an internal ingress controller
 - Helm Charts to deply the Kind Ingress Nginx Controller, the Web API, and the front end application
 
-## Prerequisites:
+## Prerequisites
 - Docker CE for Windows v19.0.0 or later running Linux Containers
 - Kubectl v1.18.0 or later
 
-## Kind: Overview
+## Kind Overview
 Kind solves a problem that all Kubernetes developers eventually face \-\- local resource exhaustion.
 The typical convention was to use Minikube to develop inside of Kubernetes, but Minikube requires two VMs to run the control plane and worker node which can tax a laptop real quick.
 Kind takes a different approach by setting up the control plane and worker node as containers in Docker utilizing the VM that's already built for Linux containers on Windows.
