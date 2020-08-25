@@ -12,9 +12,9 @@ This is an example application that includes:
 
 ## Kind Overview
 Kind solves a problem that all Kubernetes developers eventually face \-\- local resource exhaustion.
-The typical convention was to use Minikube to develop inside of Kubernetes, but Minikube requires two VMs to run the control plane and worker node which can tax a laptop real quick.
-Kind takes a different approach by setting up the control plane and worker node as containers in Docker utilizing the VM that's already built for Linux containers on Windows.
-This means less resource intensive development workloads, and ephermeral clusters that can be leveraged when needed.
+The typical convention is to use Minikube to develop on a local Kubernetes cluster, but Minikube requires two VMs to run the control plane and worker node plus Docker for Windows running Linux containers requires its own VM as well. Let's just say that our laptop is already tired! Especially with IDEs, debuggers, package managers, and everything else that envelopes resources quickly. Or, maybe it's just Chrome with the 15 Stack Overflow and Reddit pages running? :P
+
+Kind takes a different approach by setting up the control plane and worker node as containers in Docker utilizing the VM that's already built for Linux containers on Windows. This means less resource intensive development workloads, and ephermeral clusters that can be leveraged when needed.
 
 ## Deploying the Kubernetes Cluster Using Kind
 First, you must install **Kind**. We'll be showcasing a Windows machine so we'll be using Chocolatey the Windows Package manager.
