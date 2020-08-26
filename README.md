@@ -9,6 +9,7 @@ This is an example application that includes:
 ## Prerequisites
 - Docker CE for Windows v19.0.0 or later running Linux Containers
 - Kubectl v1.18.0 or later
+- Chocolatey v0.10.0 or later
 
 ## Kind Overview
 Kind solves a problem that all Kubernetes developers eventually face \-\- local resource exhaustion.
@@ -17,8 +18,8 @@ The typical convention is to use Minikube to develop on a local Kubernetes clust
 Kind takes a different approach by setting up the control plane and worker node as containers in Docker utilizing the VM that's already built for Linux containers on Windows. This means less resource intensive development workloads, and ephemeral clusters that can be leveraged when needed.
 
 ## Deploying the Kubernetes Cluster Using Kind
-First, you must install **Kind**. We'll be showcasing a Windows machine so we'll be using Chocolatey the Windows Package manager.
-Use the following command to instlal **Kind** which should also install **Go** as well:
+First, we'll start off by install **Kind**. We'll be working on a Windows machine so we'll be using Chocolatey the Windows package manager.
+Use the following command to instlal **Kind** on your machine:
 
 ```powershell
 choco install kind -y
