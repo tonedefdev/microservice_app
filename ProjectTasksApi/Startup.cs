@@ -32,7 +32,9 @@ namespace ProjectTasksApi
                 options.AddDefaultPolicy(
                     builder =>
                     {
-                        builder.AllowAnyOrigin();
+                        builder
+                        .AllowAnyHeader()
+                        .AllowAnyOrigin();
                     });
             });
 

@@ -54,6 +54,7 @@ namespace ProjectTasksApi.Controllers
 
             try
             {
+                _context.ProjectTasksItems.Update(projectTasksItem);
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
