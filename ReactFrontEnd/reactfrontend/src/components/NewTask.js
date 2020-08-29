@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 
-class ShowModal extends Component {
+class NewTask extends Component {
   constructor(props) {
     super(props);
     this.onSubmit = this.onSubmit.bind(this)
@@ -82,4 +82,4 @@ class ShowModal extends Component {
   }
 };
 
-export default ShowModal
+export default NewTask

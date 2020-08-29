@@ -5,7 +5,8 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/esm/Container'
-import ShowModal from './ShowModal'
+import ShowModal from './NewTask'
+import NewTask from './NewTask'
 
 class Menu extends Component {
   constructor(props) {
@@ -41,11 +42,11 @@ class Menu extends Component {
             </Form>
           </Navbar>
         </Container>
-        <ShowModal
+        <NewTask
           show={this.state.modalShow}
           onHide={this.setModalHide}
           projecttasks={this.state.projecttasks}
-        ></ShowModal>
+        ></NewTask>
       </>
     )
   }
