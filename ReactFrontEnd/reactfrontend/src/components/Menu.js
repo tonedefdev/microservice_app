@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/esm/Container'
-import ShowModal from './NewTask'
 import NewTask from './NewTask'
+import Form from 'react-bootstrap/Form'
 
 class Menu extends Component {
   constructor(props) {
@@ -15,7 +13,6 @@ class Menu extends Component {
     this.setModalHide = this.setModalHide.bind(this)
     this.state = {
       modalShow: false,
-      projecttasks: this.props.projecttasks
     };
   }
 
@@ -30,23 +27,25 @@ class Menu extends Component {
   render() {
     return (
       <>
-        <Container className="bg-light">
-          <Navbar bg="light" variant="light" expand={true} sticky="top">
-            <Navbar.Brand href="#home">Project Tasks</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Button variant="outline-primary" onClick={this.setModalShow}>New Task</Button>
-            </Nav>
-            <Form inline>
-              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-              <Button variant="outline-primary">Search</Button>
+        <div className="bg-dark">
+          <Container>
+            <Navbar bg="dark" variant="dark" sticky="top">
+              <Navbar.Brand>Project Tasks</Navbar.Brand>
+              <Nav className="mr-auto text-right">
+                <Button hidden={true}></Button>
+              </Nav>
+              <Form inline>
+                <Button variant="primary" onClick={this.setModalShow}>New Task</Button>
             </Form>
-          </Navbar>
-        </Container>
-        <NewTask
-          show={this.state.modalShow}
-          onHide={this.setModalHide}
-          projecttasks={this.state.projecttasks}
-        ></NewTask>
+            </Navbar>
+          </Container>
+          <NewTask
+            show={this.state.modalShow}
+            onHide={this.setModalHide}
+            projecttasks={this.props.projecttasks}
+            addNewTask={this.props.addNewTask}
+          ></NewTask>
+        </div>
       </>
     )
   }

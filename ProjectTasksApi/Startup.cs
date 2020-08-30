@@ -33,6 +33,7 @@ namespace ProjectTasksApi
                     builder =>
                     {
                         builder
+                        .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowAnyOrigin();
                     });

@@ -6,17 +6,14 @@ import Form from 'react-bootstrap/Form'
 class NewTask extends Component {
   constructor(props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this)
-    this.name = React.createRef();
-    this.owner = React.createRef();
-    this.assignee = React.createRef();
-    this.status = React.createRef();
-    this.state = {
-      projecttasks: this.props.projecttasks
-    }
+    this.submitTask = this.submitTask.bind(this)
+    this.name = React.createRef()
+    this.owner = React.createRef()
+    this.assignee = React.createRef()
+    this.status = React.createRef()
   }
 
-  onSubmit(event) {
+  submitTask(event) {
     event.preventDefault();
     let data = {
       "name": this.name.current.value,
@@ -25,13 +22,24 @@ class NewTask extends Component {
       "status": this.status.current.value
     };
 
-    fetch('https://localhost:32778/api/ProjectTasksItems', {
+    fetch('https://localhost:32770/api/ProjectTasksItems', {
       method: 'post',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(data)
     })
     .then(res => res.json())
-    .catch(console.log(data))
+    .then(this.props.onHide)
+    .catch(console.log())
+  }
+
+  addTask() {
+    let data = {
+      "name": this.name.current.value,
+      "owner": this.owner.current.value,
+      "assignee": this.assignee.current.value,
+      "status": this.status.current.value
+    };
+    this.props.addNewTask(JSON.stringify(data))
   }
 
   render() {
@@ -70,7 +78,7 @@ class NewTask extends Component {
             <Button variant="secondary" className="mr-1" onClick={onHide}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.onSubmit}>
+            <Button variant="primary" onClick={this.submitTask}>
               Create Task
             </Button>
           </div>
