@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import Navbar from 'react-bootstrap/Navbar'
-import Nav from 'react-bootstrap/Nav'
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/esm/Container'
+import { Navbar, Nav, Button, Container, Form } from 'react-bootstrap'
 import NewTask from './NewTask'
-import Form from 'react-bootstrap/Form'
 
 class Menu extends Component {
   constructor(props) {

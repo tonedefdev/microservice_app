@@ -6,6 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.updateTasks = this.updateTasks.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
     this.state = {
       projecttasks: []
     };
@@ -13,6 +14,16 @@ class App extends Component {
 
   updateTasks(projecttasks) {
     this.setState({projecttasks})
+  }
+
+  handleDelete(event, id) {
+    event.preventDefault()
+    fetch('https://localhost:32770/api/ProjectTasksItems/' + id, {
+      method: 'delete',
+      headers: {'Content-Type':'application/json'},
+    })
+    .then(res => res.json())
+    .catch(console.log())
   }
 
   componentDidMount() {
@@ -39,7 +50,7 @@ class App extends Component {
     return (
       <>
         <Menu projecttasks={this.state.projecttasks} addNewTask={this.updateTasks}></Menu>
-        <ProjectTasks projecttasks={this.state.projecttasks} deleteTheTask={this.updateTasks}></ProjectTasks>
+        <ProjectTasks projecttasks={this.state.projecttasks} deleteTask={this.handleDelete}></ProjectTasks>
       </>
     );
   }
