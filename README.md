@@ -1,8 +1,8 @@
 # Example Microservices App Running on Kind
 
 This is an example application that includes:
-- A .NET Core 3.1 API application for a project tasks management service
-- A Bootstrap 4 / JQuery front end running on Nginx
+- .NET Core 3.1 API application for a project tasks management service
+- ReactJS front end running on nodeJS
 - Kind Kubernetes cluster configurations with an internal ingress controller
 - Helm Charts to deply the Kind Ingress Nginx Controller, the Web API, and the front end application
 
@@ -13,7 +13,7 @@ This is an example application that includes:
 
 ## Kind Overview
 Kind solves a problem that all Kubernetes developers eventually face \-\- local resource exhaustion.
-The typical convention is to use Minikube to develop on a local Kubernetes cluster, but Minikube requires two VMs to run the control plane and worker node plus Docker for Windows running Linux containers requires its own VM as well. Let's just say that our laptop is already tired! Especially with IDEs, debuggers, package managers, and everything else that envelopes resources quickly. Or, maybe it's just Chrome with the 15 Stack Overflow and Reddit pages running? :P
+The typical convention is to use Minikube to develop on a local Kubernetes cluster, but Minikube requires two VMs to run the control plane and worker node. In addition Docker for Windows requires another VM to run Linux containers. Let's just say that our laptop is already tired! Especially with IDEs, debuggers, package managers, and everything else that envelopes resources quickly. Or, maybe it's just Chrome with the 15 Stack Overflow and Reddit pages running? :P
 
 Kind takes a different approach by setting up the control plane and worker node as containers in Docker utilizing the VM that's already built for Linux containers on Windows. This means less resource intensive development workloads, and ephemeral clusters that can be leveraged when needed.
 
@@ -61,7 +61,7 @@ kubectl cluster-info --context kind-kind
 Thanks for using kind! 😊
 ```
 
-This will bootstrap a Kubernetes cluster using Docker containers and will then merge the admin kubeconfig to your user directory. Additionally, the configuration that we passed in also supports ingress-nginx so that we can expose services within the cluster just like we would in a normal Kubernetes cluster in AKS, EKS, or GKE \-\- pretty cool!
+This will bootstrap a Kubernetes cluster using Docker containers as the control plane and worker nodes and will then merge the admin kubeconfig to your user directory. Additionally, the configuration that we passed in also supports ingress-nginx so that we can expose services within the cluster just like we would in a normal Kubernetes cluster in AKS, EKS, or GKE \-\- pretty cool!
 
 Let's verify cluster access by running:
 ```sh
@@ -77,7 +77,7 @@ kind-control-plane   Ready    master   41m   v1.18.2
 Next, we'll install Helm and then install the necessary charts to get the ingress-nginx controller deployed along with the application components.
 
 ## Setup Helm and Deploy the Application Components
-Helm is THE package manager for Kubernetes applications. It allows you to bundle Kubernetes manifests into a single package to make it eaiser to deploy them to Kubernetes clusters. Helm also supports templating using a Go based template syntax in addition to complete application lifecycle management. Everything you can do with Helm is out of the scope of this readme, but we'll introduce you to some use cases along the way.
+Helm is THE package manager for Kubernetes applications. It allows you to bundle Kubernetes manifests into a single package making them easier to deploy. Helm also supports templating using a Go based template syntax in addition to complete application lifecycle management. Everything you can do with Helm is out of the scope of this readme, but we'll introduce you to some use concepts along the way.
 
 Let's first install Helm via Chocolatey:
 ```powershell
@@ -89,12 +89,12 @@ We can verify the installation by running:
 helm version
 ```
 
-Navigate to the **artifacts** directory from the repo we cloned ealier, and examine it. We'll start off by deploying the ingress-nginx controller which is contained within the *kind-ingress-nginx-0.1.0.tgz* archive. We'll also use flags to create the namespace using Helm:
+Navigate to the **artifacts** directory from the repo we cloned ealier, and examine it. We'll start off by deploying the ingress-nginx controller artifact which is contained within the *kind-ingress-nginx-0.1.0.tgz* archive. We'll also use flags to have Helm create the namespace:
 ```sh
 helm install kind-ingress-nginx ./kind-ingress-nginx-0.1.0.tgz --namespace=ingress-nginx --create-namespace
 ```
 
-Once finished deploying all of the resources for the ingress-nginx controller to your Kind cluster Helm will give the following output:
+Once Helm has finished deploying all of the resources for the ingress-nginx controller to your Kind cluster \-\- Helm will give the following output:
 ```txt
 NAME: kind-ingress-nginx
 LAST DEPLOYED: Mon Aug 24 21:23:11 2020

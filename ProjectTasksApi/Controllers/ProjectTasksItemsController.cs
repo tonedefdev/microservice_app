@@ -22,7 +22,9 @@ namespace ProjectTasksApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjectTasksItem>>> GetProjectTasksItems()
         {
-            return await _context.ProjectTasksItems.ToListAsync();
+            return await _context.ProjectTasksItems.OrderByDescending(
+                task => task.Id)
+                    .ToListAsync();
         }
 
         // GET: api/ProjectTasksItems/5

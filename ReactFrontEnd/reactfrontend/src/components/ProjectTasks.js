@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { Container, Row, Card, Col, Button } from 'react-bootstrap'
+import { Container, Row, Card, Col, Button, DropdownButton, ButtonGroup, Dropdown } from 'react-bootstrap'
 
 class ProjectTasks extends Component {
   render() {
     return (
       <Container>
         <Row>
-          { this.props.projecttasks.map((task) => (
+          { this.props.projectTasks.map((task) => (
             <Col className="col-sm-6" key={task.id}>
               <Card className="mt-5">
                 <Card.Header>
-                    <p className="card-text">Status: {task.isComplete ? "Complete" : "Pending"}</p>
+                    <p className="card-text">Status: {task.status}</p>
                 </Card.Header>
                 <Card.Body>
                     <h5 className="card-title">Task: {task.name}</h5>
@@ -19,8 +19,23 @@ class ProjectTasks extends Component {
                 </Card.Body>
                 <Card.Footer>
                   <div className="float-right">
-                    <Button variant="success">Complete</Button>
-                    <Button variant="danger" className="ml-1" onClick={(event) => this.props.deleteTask(event, task.id)} >Delete</Button>
+                    <ButtonGroup>
+                    <DropdownButton as={ButtonGroup} variant="info" title="Status">
+                      <Dropdown.Item 
+                        eventKey="1" 
+                        onSelect={(e) => this.props.updateStatus(e, task.id)}
+                      >Complete</Dropdown.Item>
+                      <Dropdown.Item 
+                        eventKey="2"
+                        onSelect={(e) => this.props.updateStatus(e, task.id)}
+                      >In Progress</Dropdown.Item>
+                      <Dropdown.Item 
+                        eventKey="3"
+                        onSelect={(e) => this.props.updateStatus(e, task.id)}
+                      >Pending</Dropdown.Item>
+                    </DropdownButton>
+                      <Button variant="danger" className="ml-1" onClick={(e) => this.props.deleteTask(e, task.id)}>Delete</Button>
+                    </ButtonGroup>
                   </div>
                 </Card.Footer>
               </Card>

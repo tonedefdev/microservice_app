@@ -38,8 +38,9 @@ class Menu extends Component {
           <NewTask
             show={this.state.modalShow}
             onHide={this.setModalHide}
-            projecttasks={this.props.projecttasks}
+            projectTasks={this.props.projectTasks}
             addNewTask={this.props.addNewTask}
+            apiUrl={this.props.apiUrl}
           ></NewTask>
         </div>
       </>

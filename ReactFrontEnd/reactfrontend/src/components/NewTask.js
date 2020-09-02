@@ -4,40 +4,29 @@ import { Button, Modal, Form } from 'react-bootstrap'
 class NewTask extends Component {
   constructor(props) {
     super(props);
-    this.submitTask = this.submitTask.bind(this)
     this.name = React.createRef()
     this.owner = React.createRef()
     this.assignee = React.createRef()
     this.status = React.createRef()
   }
 
-  submitTask(event) {
-    event.preventDefault();
+  addTask(e) {
+    e.preventDefault()
     let data = {
       "name": this.name.current.value,
       "owner": this.owner.current.value,
       "assignee": this.assignee.current.value,
       "status": this.status.current.value
     };
-
-    fetch('https://localhost:32770/api/ProjectTasksItems', {
+    fetch(this.props.apiUrl, {
       method: 'post',
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify(data)
     })
     .then(res => res.json())
+    .then(this.props.addNewTask(data))
     .then(this.props.onHide)
     .catch(console.log())
-  }
-
-  addTask() {
-    let data = {
-      "name": this.name.current.value,
-      "owner": this.owner.current.value,
-      "assignee": this.assignee.current.value,
-      "status": this.status.current.value
-    };
-    this.props.addNewTask(JSON.stringify(data))
   }
 
   render() {
@@ -50,7 +39,7 @@ class NewTask extends Component {
         aria-labelledby="contained-modal-title-vcenter"
         centered 
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton={true} onHide={onHide}>
           <Modal.Title id="contained-modal-title-vcenter">
             Create a New Task
           </Modal.Title>
@@ -76,7 +65,7 @@ class NewTask extends Component {
             <Button variant="secondary" className="mr-1" onClick={onHide}>
               Close
             </Button>
-            <Button variant="primary" onClick={this.submitTask}>
+            <Button variant="primary" onClick={(e) => this.addTask(e)}>
               Create Task
             </Button>
           </div>
