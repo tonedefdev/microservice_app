@@ -2,7 +2,7 @@
 
 This is an example application that includes:
 - .NET Core 3.1 API application for a project tasks management service
-- ReactJS front end running on nodeJS
+- React.js front end running on Node.js to interact with our API
 - Kind Kubernetes cluster configurations with an internal ingress controller
 - Helm Charts to deply the Kind Ingress Nginx Controller, the Web API, and the front end application
 
