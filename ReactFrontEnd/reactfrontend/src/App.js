@@ -6,9 +6,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.handleAdd = this.handleAdd.bind(this)
-    this.handleDelete = this.handleDelete.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.apiUrl = 'http://' + process.env.API_SERVICE_NAME +'/api/ProjectTasksItems/'
+    this.handleDelete = this.handleDelete.bind(this)
+    this.handleEdit = this.handleEdit.bind(this)
+    this.apiUrl = 'https://localhost:32778/api/ProjectTasksItems/'
     this.state = {
       projectTasks: []
     };
@@ -19,7 +20,7 @@ class App extends Component {
       case '1':
         return 'Complete'
       case '2':
-        return 'In Progres'
+        return 'In Progress'
       case '3':
         return 'Pending'
       default:
@@ -48,6 +49,20 @@ class App extends Component {
     let index = taskCopy.findIndex(el => el.id === id)
     let status = this.switchStatus(e)
     taskCopy[index].status = status
+    fetch(this.apiUrl + id, {
+      method: 'put',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(taskCopy[index])
+    })
+    .then(this.setState({ projectTasks: taskCopy }))
+    .catch(console.log())
+  }
+
+  handleEdit(e, value, id, item) {
+    e.preventDefault()
+    let taskCopy = [...this.state.projectTasks]
+    let index = taskCopy.findIndex(el => el.id === id)
+    taskCopy[index][item] = value
     fetch(this.apiUrl + id, {
       method: 'put',
       headers: {'Content-Type':'application/json'},
@@ -90,7 +105,8 @@ class App extends Component {
         <ProjectTasks 
           projectTasks={this.state.projectTasks} 
           deleteTask={this.handleDelete} 
-          updateStatus={this.handleChange}>
+          updateStatus={this.handleChange}
+          handleEdit={this.handleEdit}>
         </ProjectTasks>
       </>
     );

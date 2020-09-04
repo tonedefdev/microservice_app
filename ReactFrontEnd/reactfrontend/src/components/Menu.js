@@ -32,7 +32,7 @@ class Menu extends Component {
               </Nav>
               <Form inline>
                 <Button variant="primary" onClick={this.setModalShow}>New Task</Button>
-            </Form>
+              </Form>
             </Navbar>
           </Container>
           <NewTask
