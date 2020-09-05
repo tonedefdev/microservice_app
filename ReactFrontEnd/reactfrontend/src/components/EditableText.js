@@ -6,7 +6,7 @@ class EditableText extends Component {
     this.state = {
       name: props.name,
       type: props.type || 'text',
-      value: props.value || ' ',
+      value: props.value || '       ',
       editClassName: props.editClassName,
       edit: false
     }
@@ -14,7 +14,7 @@ class EditableText extends Component {
 
   render() {
     return (
-      this.state.edit===true&&
+      this.state.edit === true &&
       <input 
         name={this.state.name}
         type={this.state.type}
@@ -40,7 +40,12 @@ class EditableText extends Component {
             this.setState({ edit: false, value: this.state.backup })
           }
         }}
-      />
+        onKeyPress={(e)=> {
+          if (e.key === 'Enter' || e.keyCode === 13) {
+            e.preventDefault()
+            this.setState({ edit: false, value: e.target.value })
+          }
+        }}/>
       ||
       <span onClick={(e)=>{
           this.setState({ edit: this.state.edit !== true })

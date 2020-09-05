@@ -9,7 +9,7 @@ class ProjectTasks extends Component {
         <Row>
           { this.props.projectTasks.map((task) => (
             <Col className="col-sm-6" key={task.id}>
-              <Card className="mt-5">
+              <Card className="shadow mt-5">
                 <Card.Header>
                   <p className="card-text">Status: {task.status}</p>
                 </Card.Header>

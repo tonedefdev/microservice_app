@@ -8,6 +8,7 @@ class NewTask extends Component {
     this.owner = React.createRef()
     this.assignee = React.createRef()
     this.status = React.createRef()
+    this.validateForm = this.validateForm.bind(this)
   }
 
   addTask(e) {
@@ -29,6 +30,14 @@ class NewTask extends Component {
     .catch(console.log())
   }
 
+  validateForm(value, event) {
+    if (value === '')
+    {
+      console.log(value)
+      return 'Error'
+    }
+  }
+
   render() {
     const onHide = this.props.onHide;
     return (
@@ -48,24 +57,31 @@ class NewTask extends Component {
           <Form>
           <Form.Group controlId="formGroupName">
             <Form.Label>Task Name</Form.Label>
-            <Form.Control placeholder="Enter task name" ref={this.name} />
+            <Form.Control 
+              placeholder="Enter task name" 
+              onChange={(e)=> {
+                const value = e.target.value
+                const event = e
+                this.validateForm(value, event)
+              }} 
+              ref={this.name}/>
           </Form.Group>
           <Form.Group controlId="formGroupOwner">
             <Form.Label>Owner</Form.Label>
-            <Form.Control placeholder="Enter the task owner" ref={this.owner} />
+            <Form.Control placeholder="Enter the task owner" ref={this.owner}/>
           </Form.Group>
           <Form.Group controlId="formGroupAssignee" >
             <Form.Label>Assignee</Form.Label>
-            <Form.Control placeholder="Enter the task assigneee" ref={this.assignee} />
+            <Form.Control placeholder="Enter the task assigneee" ref={this.assignee}/>
           </Form.Group>
           <Form.Group controlId="formGroupOwner">
-            <Form.Control type="hidden" value="Pending" ref={this.status} />
+            <Form.Control type="hidden" value="Pending" ref={this.status}/>
           </Form.Group>
           <div className="float-right">
             <Button variant="secondary" className="mr-1" onClick={onHide}>
               Close
             </Button>
-            <Button variant="primary" onClick={(e) => this.addTask(e)}>
+            <Button variant="primary" onClick={(e)=>this.addTask(e)}>
               Create Task
             </Button>
           </div>

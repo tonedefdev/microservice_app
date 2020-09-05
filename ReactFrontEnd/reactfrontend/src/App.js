@@ -9,7 +9,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
-    this.apiUrl = 'https://localhost:32778/api/ProjectTasksItems/'
+    this.apiUrl = 'https://localhost:32770/api/ProjectTasksItems/'
     this.state = {
       projectTasks: []
     };
