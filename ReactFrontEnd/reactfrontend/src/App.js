@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import ProjectTasks from './components/ProjectTasks'
 import Menu from './components/Menu'
+//New tag
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleEdit = this.handleEdit.bind(this)
-    this.apiUrl = 'https://localhost:32770/api/ProjectTasksItems/'
+    this.apiUrl = 'http://localhost/api/ProjectTasksItems/'
     this.state = {
       projectTasks: []
     };

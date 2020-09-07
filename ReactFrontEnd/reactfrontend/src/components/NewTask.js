@@ -8,10 +8,11 @@ class NewTask extends Component {
     this.owner = React.createRef()
     this.assignee = React.createRef()
     this.status = React.createRef()
+    this.submit = React.createRef()
     this.validateForm = this.validateForm.bind(this)
   }
 
-  addTask(e) {
+  addTask(e) {    
     e.preventDefault()
     let data = {
       "name": this.name.current.value,
@@ -31,10 +32,18 @@ class NewTask extends Component {
   }
 
   validateForm(value, event) {
+    event.target.classList.remove('is-invalid')
     if (value === '')
     {
-      console.log(value)
-      return 'Error'
+      event.target.className += ' is-invalid'
+      this.submit.current.className += ' disabled'
+      this.submit.current.disabled = true
+    }
+    else
+    {
+      event.target.className += ' is-valid'
+      this.submit.current.classList.remove('disabled')
+      this.submit.current.disabled = false
     }
   }
 
@@ -68,11 +77,25 @@ class NewTask extends Component {
           </Form.Group>
           <Form.Group controlId="formGroupOwner">
             <Form.Label>Owner</Form.Label>
-            <Form.Control placeholder="Enter the task owner" ref={this.owner}/>
+            <Form.Control 
+              placeholder="Enter the task owner" 
+              onChange={(e)=> {
+                const value = e.target.value
+                const event = e
+                this.validateForm(value, event)
+              }} 
+              ref={this.owner}/>
           </Form.Group>
           <Form.Group controlId="formGroupAssignee" >
             <Form.Label>Assignee</Form.Label>
-            <Form.Control placeholder="Enter the task assigneee" ref={this.assignee}/>
+            <Form.Control 
+              placeholder="Enter the task assigneee"
+              onChange={(e)=> {
+                const value = e.target.value
+                const event = e
+                this.validateForm(value, event)
+              }} 
+              ref={this.assignee}/>
           </Form.Group>
           <Form.Group controlId="formGroupOwner">
             <Form.Control type="hidden" value="Pending" ref={this.status}/>
@@ -81,7 +104,11 @@ class NewTask extends Component {
             <Button variant="secondary" className="mr-1" onClick={onHide}>
               Close
             </Button>
-            <Button variant="primary" onClick={(e)=>this.addTask(e)}>
+            <Button 
+              variant="primary" 
+              onClick={(e)=>this.addTask(e)}
+              ref={this.submit}
+              disabled={false}>
               Create Task
             </Button>
           </div>

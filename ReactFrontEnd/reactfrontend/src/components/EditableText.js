@@ -28,9 +28,7 @@ class EditableText extends Component {
           this.setState({ backup: this.state.value })
         }}
         onChange={(e)=>{
-          const value = e.target.value
           this.setState({ value: e.target.value })
-          this.props.handleEdit(e, value, this.props.id, this.props.item)
         }}
         onBlur={(e)=>{
           this.setState({ edit:false })
@@ -43,7 +41,9 @@ class EditableText extends Component {
         onKeyPress={(e)=> {
           if (e.key === 'Enter' || e.keyCode === 13) {
             e.preventDefault()
+            const value = e.target.value
             this.setState({ edit: false, value: e.target.value })
+            this.props.handleEdit(e, value, this.props.id, this.props.item)
           }
         }}/>
       ||
