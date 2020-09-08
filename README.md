@@ -122,14 +122,42 @@ STATUS: deployed
 REVISION: 1
 NOTES:
 1. Get the application URL by running these commands:
-  http:///api/ProjectTasksItems
+  http://localhost/api/ProjectTasksItems
 ```
 
->You might have noticed that the URL Helm produces in the *NOTES:* is malformed. This is due to the fact that when we deploy the application we also deploy the ingress definition for the application in the **web-api** namespace. The ingress defintion has an annotation that the ingress-nginx controller will look for. Once the ingress-nginx controller finds ingress' with this annotation it will associate itself with the the defintion and supply the defined services an external address. This process takes a minute or so after deployment, and then the web-api will be available via http://localhost/api/ProjectTasksItems
+We'll need to watch the ingress definition until ingress-nginx attaches an external address to the service:
+```
+kubectl get ingress -n web-api -w
+```
 
-You should be able to navigate to http://localhost/api/ProjectTasksItems and return the following:
+It will be ready when we see 'localhost' under 'ADDRESS'
+```
+NAME              CLASS    HOSTS       ADDRESS     PORTS   AGE
+web-api-service   <none>   localhost   localhost   80      12m
+```
+
+Now we should be able to navigate to http://localhost/api/ProjectTasksItems and return the following:
 ```txt
 []
 ```
 
-This is the expected output as the container uses an in memory database, so there is nothing found...yet! Congratulations, as we have just deployed two services to our cluster using Helm, and exposed our API using ingress-nginx so that our front end can interact with it.
+This is the expected output as the .NET Core Web API uses an in memory database, so there is nothing found...yet! Congratulations, as we have just deployed two services to our cluster using Helm, and exposed our API using ingress-nginx so that our front end can interact with it once deployed. Let's do that now!
+
+## Deploy the React Front End
+Everything for the React front end has already been packaged and can be found in the .\artifacts directory. We'll need to just navigate to the .\artifacts directory run:
+```
+helm install react-frontend .\react-frontend-0.1.0.tgz --namespace=react-frontend --create-namespace
+```
+Once complete Helm should return the following:
+```
+NAMESPACE: react-frontend
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  http://localhost/
+```
+
+That's it! Now we can navigate to http://localhost and see our Project Tasks menu. Create a new task by selecting the "New Task" button, and then you should see the new task card show up. Everything is now up and running successfully on Kind cluster using multiple frameworks to accomplish our end goal.
+
+I hope this has been helpful for you and if you have any questions feel free to reach out!
