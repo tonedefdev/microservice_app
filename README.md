@@ -77,7 +77,7 @@ kind-control-plane   Ready    master   41m   v1.18.2
 Next, we'll install Helm and then install the necessary charts to get the ingress-nginx controller deployed along with the application components.
 
 ## Setup Helm and Deploy the Application Components
-Helm is THE package manager for Kubernetes applications. It allows you to bundle Kubernetes manifests into a single package making them easier to deploy. Helm also supports templating using a Go based template syntax in addition to complete application lifecycle management. Everything you can do with Helm is out of the scope of this readme, but we'll introduce you to some use concepts along the way.
+Helm is **THE** package manager...OK not really, but it's definitely the most popular for packaging Kubernetes applications. It allows you to bundle Kubernetes manifests into a single package making them easier to deploy. Helm also supports templating using a Go based template syntax in addition to complete application lifecycle management. Everything you can do with Helm is out of the scope of this readme, but we'll introduce you to some use concepts along the way.
 
 Let's first install Helm via Chocolatey:
 ```powershell
@@ -144,7 +144,7 @@ Now we should be able to navigate to http://localhost/api/ProjectTasksItems and 
 This is the expected output as the .NET Core Web API uses an in memory database, so there is nothing found...yet! Congratulations, as we have just deployed two services to our cluster using Helm, and exposed our API using ingress-nginx so that our front end can interact with it once deployed. Let's do that now!
 
 ## Deploy the React Front End
-Everything for the React front end has already been packaged and can be found in the .\artifacts directory. We'll need to just navigate to the .\artifacts directory run:
+Everything for the React front end has already been packaged for Helm and can be found in the **artifacts** directory. We'll need to just navigate to the **artifacts** directory and run the following Helm command:
 ```
 helm install react-frontend .\react-frontend-0.1.0.tgz --namespace=react-frontend --create-namespace
 ```
@@ -158,6 +158,13 @@ NOTES:
   http://localhost/
 ```
 
-That's it! Now we can navigate to http://localhost and see our Project Tasks menu. Create a new task by selecting the "New Task" button, and then you should see the new task card show up. Everything is now up and running successfully on Kind cluster using multiple frameworks to accomplish our end goal.
+This Helm chart deploys an ingress definition for the React application so we'll need to watch the ingress definition until our ingress-nginx controller binds an address to it before it can become accesible. Run the following command until ADDRESS displays localhost: 
+```
+kubectl get ingress -n react-frontend -w
+```
+
+Now we can navigate to http://localhost and see our Project Tasks menu. Create a new task by selecting the **New Task** button, fill out the fields, and then you should see the new task card show up. Everything is now up and running successfully on our Kind cluster! We have a React frontend application service and a .NET Core API service with ingress defintions that control traffic in to the cluster. 
+
+This application is definitely not production ready, and there's vast improvements that can be made, but I hope this gives a great demo of what is possible using Kind and how it can be leveraged to speed up development time when creating microservices with Kubernetes.
 
 I hope this has been helpful for you and if you have any questions feel free to reach out!
