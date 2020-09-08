@@ -83,7 +83,7 @@ kubectl get nodes -w
 
 Next, we'll install Helm and then install the necessary charts to get the ingress-nginx controller deployed along with the API components.
 
-## Setup Helm and Deploy the Application Components
+## Setup Helm and Deploy the Web API Components
 Helm is **THE** package manager for Kubernetes...OK not really, but it's definitely the most popular for Kubernetes applications. It allows you to bundle Kubernetes manifests into a single package making them easier to deploy. Helm also supports templating using a Go based template syntax in addition to complete application lifecycle management. Everything you can do with Helm is out of the scope of this readme, but we'll introduce you to some of its concepts along the way.
 
 Let's first install Helm via Chocolatey:
