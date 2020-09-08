@@ -4,7 +4,7 @@ This is an example application that includes:
 - .NET Core 3.1 API application for a project tasks management service
 - React.js front end running on Node.js to interact with our API
 - Kind Kubernetes cluster configurations with an internal ingress controller
-- Helm Charts to deply the Kind Ingress Nginx Controller, the Web API, and the front end application
+- Helm Charts to deploy the Kind Ingress Nginx Controller, the Web API, and the front end application
 
 ## Prerequisites
 - Docker CE for Windows v19.0.0 or later running Linux Containers
