@@ -101,7 +101,7 @@ Navigate to the **artifacts** directory from the repo we cloned ealier, and exam
 helm install kind-ingress-nginx ./kind-ingress-nginx-0.1.0.tgz --namespace=ingress-nginx --create-namespace
 ```
 
->Typically you'd upload your Helm Charts to a repository and then add that repository to Helm. That can still be accomplished, but to speed up local development I find it easier to package the Helm Charts in archives, and deploy them locally. Packaging Helm Charts locally is accomplished in this specific repo by running `helm package ./helm/web-api/ -d ./artificats`
+>Typically you'd upload your Helm Charts to a repository and then add that repository to Helm. That can still be accomplished, but to speed up local development I find it easier to package the Helm Charts in archives, and deploy them locally. For example, to package the `web-api` Helm Chart we run the following Helm command in the root directory of the repo `helm package ./helm/web-api/ -d ./artifacts`
 
 Helm will give the following output once it has finished deploying all of the resources for the ingress-nginx controller to your Kind cluster:
 ```txt
