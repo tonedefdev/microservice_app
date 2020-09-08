@@ -82,7 +82,7 @@ kubectl get nodes -w
 Next, we'll install Helm and then install the necessary charts to get the ingress-nginx controller deployed along with the API components.
 
 ## Setup Helm and Deploy the Application Components
-Helm is **THE** package manager for Kubernetes...OK not really, but it's definitely the most popular for Kubernetes applications. It allows you to bundle Kubernetes manifests into a single package making them easier to deploy. Helm also supports templating using a Go based template syntax in addition to complete application lifecycle management. Everything you can do with Helm is out of the scope of this readme, but we'll introduce you to some use concepts along the way.
+Helm is **THE** package manager for Kubernetes...OK not really, but it's definitely the most popular for Kubernetes applications. It allows you to bundle Kubernetes manifests into a single package making them easier to deploy. Helm also supports templating using a Go based template syntax in addition to complete application lifecycle management. Everything you can do with Helm is out of the scope of this readme, but we'll introduce you to some of its concepts along the way.
 
 Let's first install Helm via Chocolatey:
 ```powershell
@@ -135,7 +135,7 @@ We'll need to watch the ingress definition until ingress-nginx attaches an exter
 kubectl get ingress -n web-api -w
 ```
 
-It will be ready when we see 'localhost' under 'ADDRESS'
+It will be ready when we see **localhost** under **ADDRESS**:
 ```
 NAME              CLASS    HOSTS       ADDRESS     PORTS   AGE
 web-api-service   <none>   localhost   localhost   80      12m
@@ -146,7 +146,7 @@ Now we should be able to navigate to http://localhost/api/ProjectTasksItems and 
 []
 ```
 
-This is the expected output as the .NET Core Web API uses an in memory database, so there is nothing found...yet! Congratulations, as we have just deployed two services to our cluster using Helm, and exposed our API using ingress-nginx so that our front end can interact with it once deployed. Let's do that now!
+This is the expected output as the .NET Core Web API uses an in-memory database, so there is no data to be returned! We have just deployed two services to our cluster using Helm, and exposed our API using ingress-nginx so that our front end can interact with it once deployed. Let's do that now so we can actually use the API service.
 
 ## Deploy the React Front End
 Everything for the React front end has already been packaged for Helm and can be found in the **artifacts** directory. We'll need to navigate to the **artifacts** directory and run the following Helm command to deploy the service:
@@ -170,6 +170,6 @@ kubectl get ingress -n react-frontend -w
 
 Now we can navigate to http://localhost and see our Project Tasks menu. Create a new task by selecting the **New Task** button, fill out the fields, and then you should see the new task card show up. Everything is now up and running successfully on our Kind cluster! We have a React frontend application service and a .NET Core API service with ingress defintions that control traffic in to the cluster. 
 
-This application is definitely not production ready, and there's vast improvements that can be made, especially but I hope this gives a great demo of what is possible using Kind and how it can be leveraged to speed up development time when creating microservices with Kubernetes.
+This application is definitely not production ready, and there's vast improvements that can be made, especially since the API is allowing CORS requests from any domain, on any method, not secure by any means, but I hope this gives you an idea of what is possible using Kind and how it can be leveraged to speed up development time when creating microservices with Kubernetes.
 
 I hope this has been helpful for you and if you have any questions feel free to reach out!
