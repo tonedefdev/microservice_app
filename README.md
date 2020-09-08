@@ -19,7 +19,7 @@ Kind takes a different approach by setting up the control plane and worker node 
 
 ## Deploying the Kubernetes Cluster Using Kind
 First, we'll start off by installing **Kind**. We'll be working on a Windows machine so we'll be using **Chocolatey** the Windows package manager.
-Use the following command to instlal **Kind** on your machine:
+Use the following command to install **Kind** on your machine:
 
 ```powershell
 choco install kind -y
