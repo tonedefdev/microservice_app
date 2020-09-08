@@ -74,7 +74,7 @@ NAME                 STATUS   ROLES    AGE   VERSION
 kind-control-plane   Ready    master   41m   v1.18.2
 ```
 
-If the **STATUS** shows not ready you can watch the nodes with the following command until the **STATUS** is **Ready**:
+If the **STATUS** shows **NotReady** you can watch the nodes with the following command until the **STATUS** is **Ready**:
 ```sh
 kubectl get nodes -w
 ```
