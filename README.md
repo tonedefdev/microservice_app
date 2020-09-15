@@ -174,6 +174,14 @@ kubectl get ingress -n react-frontend -w
 
 Now we can navigate to http://localhost and see our Project Tasks menu. Create a new task by selecting the **New Task** button, fill out the fields, and then you should see the new task card show up. Everything is now up and running successfully on our Kind cluster! We have a React frontend application service and a .NET Core API service with ingress defintions that control traffic in to the cluster. 
 
-This application is definitely not production ready, and there's vast improvements that can be made, especially since the API is allowing CORS requests from any domain, on any method, not secure by any means, but I hope this gives you an idea of what is possible using Kind and how it can be leveraged to speed up development time when creating microservices with Kubernetes.
+## Destroy the Kind Cluster
+Now that we're done testing our deployment and have had a chance to examine the microservices deployed to the cluster we can destroy it. To do so simply run:
+```
+kind delete cluster
+```
+
+That's it! The cluster is now gone for good and so are all of the resources that were deployed to it.
+
+That concludes this tutorial! One thing to keep in mind though is this application is definitely not production ready, and there's vast improvements that can be made, especially since the API is allowing CORS requests from any domain, on any method, not secure by any means, but I hope this gives you an idea of what is possible using Kind and how it can be leveraged to speed up development time when creating microservices with Kubernetes.
 
 I hope this has been helpful for you and if you have any questions feel free to reach out!
